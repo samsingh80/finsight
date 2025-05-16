@@ -1,0 +1,297 @@
+<mvc:View
+    controllerName="finsight.controller.LaunchView"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:uxap="sap.uxap"
+    xmlns:tnt="sap.tnt"
+    xmlns:f="sap.f"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:cssgrid="sap.ui.layout.cssgrid">
+
+    <uxap:ObjectPageLayout class="LaunchPage" showAnchorBar="false" id="overviewPage" toggleHeaderOnTitleClick="false">
+        
+        <uxap:headerContent>
+            <core:Fragment id="LaunchHeaderFragment" fragmentName="finsight.fragment.LaunchHeader" type="XML"/>
+        </uxap:headerContent>
+		 <uxap:ObjectPageSection  showTitle="false" class="LaunchSection">
+			<!-- <uxap:subSections> -->
+				<uxap:ObjectPageSubSection id="overViewPageSection"  showTitle="false" class="LaunchSubSection">
+
+				</uxap:ObjectPageSubSection>    
+
+			<!-- </uxap:subSections> -->
+			 </uxap:ObjectPageSection> 
+        <!-- Section 1: News Card -->
+      
+<uxap:ObjectPageSection showTitle="false">
+    <uxap:ObjectPageSubSection class="LaunchSubSection">
+        <uxap:blocks>
+
+<HBox  width="100%">
+     <VBox width="20%">
+                         <f:Card
+                        class="sapUiSmallMarginTop"
+                        width="100%"
+                        headerText="Latest News">
+                        <f:content>
+                            <List items="{news>/newsItems}" showSeparators="None">
+                                <CustomListItem>
+                                    <VBox class="sapUiTinyMargin">
+                                        <HBox alignItems="Start">
+                                            <Image src="../images/Joule_icon.png" width="2rem"/>
+                                            <VBox class="sapUiSmallMarginBegin">
+                                                <Text text="SAP Joule" class="sapMTextBold"/>
+                                                <Text text="{news>headline}" wrapping="true"/>
+                                                <Text text="now" class="sapUiTinyMarginTop sapUiContentLabelColor"/>
+                                            </VBox>
+                                        </HBox>
+                                    </VBox>
+                                </CustomListItem>
+                            </List>
+                        </f:content>
+                    </f:Card>
+     
+     </VBox>
+     <VBox width="60%">
+     <Text text="Insights tailored for your business" class="sapUiTinyMarginBottom sapMTitle"/>
+     <!-- <HBox width="100%" class="insightContainer" > -->
+     <FlexBox wrap="Wrap"  class = "tilebox"   justifyContent="Centre" >
+<GenericTile
+    class="tileclient customTile"
+    press="onTilePress"
+    tileContent="{
+        path: '/tileContent'
+    }">
+    <tileContent>
+        <TileContent>
+
+        </TileContent>
+    </tileContent>
+</GenericTile>
+
+
+<GenericTile
+    class="tileclimate customTile"
+    press="onTilePress"
+    tileContent="{
+        path: '/tileContent'
+    }">
+    <tileContent>
+        <TileContent>
+
+        </TileContent>
+    </tileContent>
+</GenericTile>
+
+<GenericTile
+    class="tilecost customTile"
+    press="onTilePress"
+    tileContent="{
+        path: '/tileContent'
+    }">
+    <tileContent>
+        <TileContent>
+
+        </TileContent>
+    </tileContent>
+</GenericTile>
+
+<GenericTile
+    class="tilecontroller customTile"
+    press="onTilePress"
+    tileContent="{
+        path: '/tileContent'
+    }">
+    <tileContent>
+        <TileContent>
+
+        </TileContent>
+    </tileContent>
+</GenericTile>
+
+
+<GenericTile
+    class="tilegenesis customTile"
+    press="onTilePress"
+    tileContent="{
+        path: '/tileContent'
+    }">
+    <tileContent>
+        <TileContent>
+
+        </TileContent>
+    </tileContent>
+</GenericTile>
+
+<GenericTile
+    class="tileintelligence customTile"
+    press="onTilePress"
+    tileContent="{
+        path: '/tileContent'
+    }">
+    <tileContent>
+        <TileContent>
+
+        </TileContent>
+    </tileContent>
+</GenericTile>
+
+<GenericTile
+    class="tileplatform customTile"
+    press="onTilePress"
+    tileContent="{
+        path: '/tileContent'
+    }">
+    <tileContent>
+        <TileContent>
+
+        </TileContent>
+    </tileContent>
+</GenericTile>
+
+<GenericTile
+    class="titleperformance customTile"
+    press="onTilePress"
+    tileContent="{
+        path: '/tileContent'
+    }">
+    <tileContent>
+        <TileContent>
+
+        </TileContent>
+    </tileContent>
+</GenericTile>     
+     
+     </FlexBox>
+     <!-- </HBox> -->
+
+
+<VBox width="100%" class="sapUiMediumMarginTop">
+    <HBox justifyContent="SpaceBetween">
+        <!-- Chart 1 -->
+        <VBox width="48%">
+            <Text text="Revenue by Region" class="sapMTitle sapUiSmallMarginBottom"/>
+<viz:VizFrame
+    id="idSpendChart1"
+    height="300px"
+    width="100%"
+    uiConfig="{applicationSet:'fiori'}"
+    vizType="line"
+    xmlns:viz="sap.viz.ui5.controls"
+    vizProperties="{
+        plotArea: { dataLabel: { visible: true, type: 'value' } },
+        title: { visible: false },
+        legend: { visible: true, position: 'bottom' }
+    }">
+
+    <viz:dataset>
+        <viz.data:FlattenedDataset xmlns:viz.data="sap.viz.ui5.data"
+            data="{chartModel>/spendDataset/data}">
+            <viz.data:dimensions>
+                <viz.data:DimensionDefinition name="Category" value="{chartModel>Category}" />
+            </viz.data:dimensions>
+            <viz.data:measures>
+                <viz.data:MeasureDefinition name="Amount" value="{chartModel>Amount}" />
+            </viz.data:measures>
+        </viz.data:FlattenedDataset>
+    </viz:dataset>
+
+    <viz:feeds>
+        <viz.feeds:FeedItem
+            uid="valueAxis"
+            type="Measure"
+            values="Amount"
+            xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"/>
+        <viz.feeds:FeedItem
+            uid="categoryAxis"
+            type="Dimension"
+            values="Category"
+            xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"/>
+    </viz:feeds>
+</viz:VizFrame>
+        </VBox>
+
+        <!-- Chart 2 -->
+        <VBox width="48%">
+            <Text text="Spend Breakdown" class="sapMTitle sapUiSmallMarginBottom"/>
+            
+            <viz:VizFrame
+    id="idSpendChart"
+    height="300px"
+    width="100%"
+    uiConfig="{applicationSet:'fiori'}"
+    vizType="donut"
+    xmlns:viz="sap.viz.ui5.controls"
+    vizProperties="{
+        plotArea: { dataLabel: { visible: true, type: 'value' } },
+        title: { visible: false },
+        legend: { visible: true, position: 'bottom' }
+    }">
+
+    <viz:dataset>
+        <viz.data:FlattenedDataset xmlns:viz.data="sap.viz.ui5.data"
+            data="{chartModel>/spendDataset/data}">
+            <viz.data:dimensions>
+                <viz.data:DimensionDefinition name="Category" value="{chartModel>Category}" />
+            </viz.data:dimensions>
+            <viz.data:measures>
+                <viz.data:MeasureDefinition name="Amount" value="{chartModel>Amount}" />
+            </viz.data:measures>
+        </viz.data:FlattenedDataset>
+    </viz:dataset>
+
+    <viz:feeds>
+        <viz.feeds:FeedItem
+            uid="size"
+            type="Measure"
+            values="Amount"
+            xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"/>
+        <viz.feeds:FeedItem
+            uid="color"
+            type="Dimension"
+            values="Category"
+            xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"/>
+    </viz:feeds>
+</viz:VizFrame>
+        </VBox>
+    </HBox>
+</VBox>
+     </VBox>
+     <VBox >
+     
+                               <Panel headerText="Personal Data Collection" class="actionCard">
+                    <Text text="Provide personal details for company records" />
+                    <ObjectStatus text="✔ Completed" state="Success"/>
+                </Panel>
+
+                <Panel headerText="Additional Data Collection" class="actionCard">
+                    <Text text="Provide additional data to complete your accounting process." />
+                    <Button text="Start" type="Emphasized"/>
+                </Panel>
+
+                <Panel headerText="Compliance Data Collection" class="actionCard">
+                    <Text text="Complete the compliance-related forms required by government rules." />
+                    <ObjectStatus text="Due: Today" state="Error"/>
+                    <Button text="Start" type="Emphasized"/>
+                </Panel>
+
+                <Panel headerText="Update your profile" class="actionCard">
+                    <Text text="Missing information. Please complete your profile data." />
+                    <Button text="Start" type="Emphasized"/>
+                </Panel>
+
+     
+     </VBox>
+
+</HBox>
+
+ 
+        </uxap:blocks>
+    </uxap:ObjectPageSubSection>
+</uxap:ObjectPageSection>
+
+    </uxap:ObjectPageLayout>
+</mvc:View>

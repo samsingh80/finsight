@@ -1,0 +1,129 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "finsight",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.17.4",
+      "toolsId": "7514d7ba-09dd-4487-ad54-66c49f1ef55c"
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "finsight-display": {
+          "semanticObject": "finsight",
+          "action": "display",
+          "title": "{{finsight-display.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.135.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "finsight.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        },
+        {
+          "uri": "reuselib/css/chatStyle.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "finsight.view",
+        "async": true,
+        "viewPath": "finsight.view"
+      },
+      "routes": [
+        {
+          "name": "RouteView1",
+          "pattern": ":?query:",
+          "target": [
+            "TargetView1"
+          ]
+        },
+        {
+          "pattern": "home",
+          "name": "home",
+          "target": "HomeView"
+        }
+      ],
+      "targets": {
+        "TargetView1": {
+          "id": "LaunchView",
+          "name": "LaunchView"
+        },
+        "HomeView": {
+          "id": "LaunchView",
+          "name": "LaunchView"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "finsight.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "finsight"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "xsappname": "finsight",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.scopeforview"
+  },{
+      "name": "$XSAPPNAME.scopeformanage"
+  }
+  ],
+  "role-templates": [
+    {
+      "name": "T_SCB_EFDNA_GenAI_Finsight_View",
+      "scope-references": ["$XSAPPNAME.scopeforview"]
+  },{
+      "name": "T_SCB_EFDNA_GenAI_Finsight_Admin",
+      "scope-references": ["$XSAPPNAME.scopeformanage"]
+  }
+  ]
+}

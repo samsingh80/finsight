@@ -1,0 +1,742 @@
+/**********Chat Box************/
+
+:root {
+    --color-snow-always-light: #ffff;
+    --color-background-graidient1: #4050b5;
+    --color-background-graidient2: #9169d9;
+    --sapField_Background: #fff;
+    --dasTextArea_BackgroundImage: linear-gradient(0deg, #556B82, #556B82);
+    --dasContent_Hover_BorderColor: #0064D9;
+    --dasContent_FocusColor: #1B90FF;
+    --sapContent_FocusColor: #1B90FF;
+}
+
+.ChatBox {
+    min-width: 0px;
+    min-height: 0px;
+    position: fixed !important;
+    border: none;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px 1px;
+    opacity: 1;
+    transition: width 0.4s ease 0s, height 0.4s ease 0s, opacity 0.4s ease-out 0s;
+    right: 0% !important;
+    bottom: 0% !important;
+    left: auto !important;
+    top: auto !important;
+    background: var(--color-snow-always-light) !important;
+    height: 100% !important;
+    width: 26% !important;
+}
+
+.ChatBoxMax {
+    min-width: 0px;
+    min-height: 0px;
+    position: absolute !important;
+    border: none;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px 1px;
+    opacity: 1;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+    top: auto !important;
+    background: var(--color-snow-always-light) !important;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.ChatBoxMin {
+    height: auto !important;
+    width: 26% !important;
+}
+
+.chatHeaderBar {
+    box-shadow: none !important;
+    padding: 0.5rem 0rem 0.5rem 0rem !important;
+     /*JouleCSS*/
+     background: linear-gradient(180deg, #5D36FF 0%, #6431FA 100%) !important;
+     width: Fill (416px)px;
+     height: Fixed (56px)px;
+     padding: 4px 0px 4px 0px;
+     gap: 0px;
+     border-radius: 16px 16px 0px 0px;
+     opacity: 0px;
+     /*JouleCSS*/
+}
+
+.jouleimg {
+    width: 120px !important;
+    height: 120px;
+    top: 110px;
+    left: 148px;
+    gap: 10px;
+    opacity: 0px;
+
+}
+
+.chatHeaderBox {
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    height: 95% !important;
+    background: linear-gradient(180deg, #5D36FF 6.46%, #A100C2 93.76%);
+}
+
+.chatHeaderBoxImage{
+    height: 80% !important;
+}
+
+.chatHeaderBoxImage .sapMFlexItem{
+    align-content: center !important;
+}
+
+.chatCloseButton .sapMBtnInner.sapMBtnDefault .sapUiIcon {
+    color: var(--color-snow-always-light) !important;
+    background-color: transparent;
+}
+
+
+.chatHeaderText1 {
+    color: var(--color-snow-always-light) !important;
+    font-size: 20px !important;
+    line-height: 30px !important;
+    font-weight: 300 !important;
+}
+
+.chatHeaderText2 {
+    color: var(--color-snow-always-light) !important;
+    font-size: 36px !important;
+    line-height: 49px !important;
+    font-weight: 300 !important;
+}
+
+.chatHeaderText3 {
+    width: fit-content;
+    margin-top: .5rem;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px 8px 8px 0;
+    line-height: 20px;
+    color: #333333;
+    background-color: #ffffff;
+    border: unset;
+    padding: .5rem 1rem;
+}
+
+.chatHeaderTitle {
+    color: var(--color-snow-always-light) !important;
+    font-size: 20px !important;
+    line-height: 30px !important;
+    font-weight: 500 !important;
+}
+
+.chatListItem {
+    border: none !important;
+}
+
+.agentBox {
+    padding: 6px !important;
+}
+
+.agentBox .sapMFlexItem {
+    max-width: 90% !important;
+    width: max-content !important;
+}
+
+.userBox {
+    padding: 6px !important;
+}
+
+.agentBox:hover .messageEmotions {
+    display: flex;
+}
+
+.messageEmotions {
+    display: none;
+    margin-left: 10px;
+}
+
+.messageEmotions.showEmotions {
+    display: flex;
+}
+
+.feedbackBox {
+    display: none;
+    margin-left: 15px;
+}
+
+.feedbackBox.showEmotions {
+    display: flex;
+}
+
+.submitFeedbackBtn .sapMBtnInner {
+    background-color: #6034fe !important;
+    color: white !important;
+    border-radius: 8px 8px 8px 8px;
+}
+
+.agreeDisagreeBox {
+    z-index: 1;
+    bottom: 6px;
+    left: 15px;
+}
+
+.agreeDisagreeIcon {
+    font-size: 1.1rem;
+    color: #0000ff;
+}
+
+.agentMessage {
+    background-color: #EFF1F2;
+    padding: 1px 10px;
+    border-radius: 8px 8px 8px 0px;
+    margin-left: 4px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+    line-height: 1.25rem;
+}
+
+.suggestionMessage {
+    background-color: #e6f2ff;
+    padding: 10px 10px;
+    border-radius: 8px 8px 8px 0px;
+    margin-left: 4px;
+}
+
+.userMessage {
+    margin: 4px 4px 4px 30px;
+    text-align: left;
+    padding: 1px 10px 1px 10px;
+    border-radius: 8px 8px 0px 8px;
+    background-color: #d8d0ff;
+    padding: 1px 10px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+    line-height: 1.25rem;
+}
+
+.dynamicChatBox {
+    padding: 0.3rem;
+}
+
+.chatFlex {
+    flex: 1 1 auto !important;
+    overflow: scroll !important;
+    align-self: center;
+    width: 700px;
+    min-width: 60%;
+    max-width: 100%;
+}
+
+
+
+.chatFooter {
+    flex-shrink: 0;
+    justify-self: flex-end;
+    padding: 8px;
+    width: 100% !important;
+}
+
+.chatFooter .sapMFlexItem {
+    width: 100% !important;
+}
+
+.chatFeed {
+    padding: 1rem !important;
+}
+
+.chatFeed .sapMFeedIn {
+    /* background-color: #2b0d85 !important; */
+    padding: 0 0 0 0 !important;
+}
+
+.disclaimerBox {
+    width: 700px;
+    min-width: 60%;
+    max-width: 100%;
+    align-self: center;
+}
+
+/* Joule CSS */
+.chatFeed .sapMFeedIn .sapMFeedInContainer {
+    width: Fill (384px)px;
+    height: Hug (36px)px;
+    background-color: #fff !important;
+    border-radius: 8px;
+    opacity: 0px;
+    border: 2px solid #0064D9;
+    background: #FFFFFF;
+    box-shadow: 2px 2px 4px rgba(85, 107, 130, 0.3) !important;
+    outline: .1rem solid #121C84 !important;
+    box-shadow: 0px 4px 8px 0px #1B90FF29;
+    box-shadow: 0px 0px 2px 0px #1B90FF29;
+    padding: 4px 0px 4px 0px;
+    gap: 0px;
+}
+/* Joule CSS */
+
+.sapMFeedIn .sapMBtn {
+    right: -1rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+/* Joule CSS */
+.chatFeed.sapMFeedIn .sapMBtnInner {
+    width: 45px;
+    height: 45px;
+    padding: 0px 6px 0px 6px;
+    gap: 6px;
+    border-radius: 24px;
+    background: #0070F2;
+    border-top: 1px solid #0070F2;
+    opacity: 0px;
+}
+/* Joule CSS */
+
+.chatFeed .sapMFeedIn .sapMBtnIcon {
+    color: var(--color-snow-always-light) !important;
+    line-height: 2.125rem !important;
+}
+
+.chatFeed .sapMFeedIn .sapMFeedInContainer .sapMTextArea .sapMInputBaseContentWrapper {
+    box-shadow: 2px 2px 4px rgba(85, 107, 130, 0.3) !important;
+    background: #fff !important;
+    outline: .1rem solid #121C84 !important;
+
+}
+
+.chatSuggestionFlexBox {
+    flex-wrap: wrap !important;
+    padding: 5px 10px !important;
+    justify-content: center !important;
+}
+
+.chatSuggestionButton {
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.chatSuggestionButton .sapMBtnInner.sapMBtnText {
+    box-shadow: 2px 2px 4px rgba(85, 107, 130, 0.3) !important;
+    border-radius: 16px !important;
+    color: #0024e9 !important;
+}
+
+
+
+/**********Chat History*********/
+
+
+.chatHistory {
+    width: 100%;
+    padding: 1rem;
+    overflow: scroll !important;
+    background-color: #fff;
+}
+
+
+/* CSS for the history list */
+.chatHistoryList {
+    width: 100%;
+    border-top: 1px solid #ddd;
+}
+
+/* CSS for each list item */
+.chatHistoryListItem {
+    border-bottom: 1px solid #ddd;
+    padding: 0.3rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.chatHistoryActions {
+    width: fit-content !important;
+}
+
+.historyFlexBoxContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 1rem;
+}
+
+.historyFlexBoxSearch {
+    display: flex;
+    flex-grow: 1;
+}
+
+.historyFlexBoxSearch .sapMFlexItem {
+    width: 100%
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scroll {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.paddingLeft1rem {
+    padding-left: 1rem !important;
+}
+
+
+/*********Dynamic*********/
+.title {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #475e75;
+}
+
+.table {
+    box-shadow: 0 4px 8px 0 #5b738b33, 0 0 2px 0 #5b738b33;
+}
+
+.table .sapMListTbl {
+    font-size: 1rem;
+}
+
+.table .sapMListTbl .sapMTableTHead .sapMTableTH,
+.table .sapMListTbl .sapMListTblHeader .sapMTableTH {
+    height: 4rem !important;
+    background: #3A88FF !important;
+}
+
+.table .sapMListTbl .sapMTableTBody .sapMListTblRow {
+    height: 3rem !important;
+}
+
+
+.tableColumnHeader {
+    font-size: 1rem !important;
+    color: var(--color-snow-always-light)ff !important;
+    white-space: nowrap !important;
+}
+
+.listBox {
+    width: 400px !important;
+    box-shadow: 0 0 1rem 0 rgba(34, 53, 72, 0.2), 0 0.5rem 0.5rem 0 rgba(34, 53, 72, 0.2) !important;
+    border-radius: 10px;
+    padding: 0.8rem;
+}
+
+.listItem {
+    justify-content: space-between !important;
+    margin: 0.5rem 0rem;
+}
+
+.listItemVBox1 {
+    width: 80%;
+}
+
+.listTitle {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0.1rem;
+}
+
+.listStatus {
+    text-wrap: nowrap !important;
+    font-size: 0.75rem !important;
+    gap:0.5rem;
+}
+
+.listDesc{
+    font-size: 12px;
+    margin-top: 0.5rem; 
+}
+
+.list .sapMListHdr {
+    height: 100% !important;
+    width: 100%;
+    padding: 0.4rem !important;
+    border: none;
+    margin-bottom: 0.5rem;
+}
+
+.listMTitleWrap {
+    white-space: normal !important;
+}
+
+.listMTextWrap {
+    white-space: normal !important;
+    font-family: "72", "72full", Arial, Helvetica, sans-serif !important;
+    font-size: .75rem;
+}
+
+.listObjBox {
+    gap:1rem;
+}
+
+.list .sapMListUl .sapMLIB {
+    border: none !important;
+}
+
+.listObjContentBox{
+    padding: 1rem;
+    gap:0.5rem;
+}
+
+.listObjContentContentTitle{
+    line-height: 1.75rem;
+    font-weight: 600;
+}
+
+.listObjContentActionBox {
+    justify-content: center;
+    align-items: center;
+    padding-top:0.5rem;;
+}
+
+
+.chart {
+    width: 390px !important;
+    height: 400px !important;
+    margin: 0rem;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #EFF1F2;
+    border-radius: 5px;
+}
+
+.illustrated {
+    width: 290px !important;
+    box-shadow: 0 0 1rem 0 rgba(34, 53, 72, 0.2), 0 0.5rem 0.5rem 0 rgba(34, 53, 72, 0.2) !important;
+}
+
+.form {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+    border-radius: 1rem;
+    color: #2b0d85;
+    width: 400px !important;
+}
+
+.form .sapUiForm .sapUiFormTitle {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.form .sapUiFormResGridCont {
+    padding: 1rem 2rem !important;
+    background-color: #eff1f2 !important;
+
+}
+
+.form .sapMLabel {
+    font-size: 0.75rem !important;
+}
+
+.form .sapMInputBaseInner {
+    font-size: 0.75rem !important;
+}
+
+.InputFlexBox {
+    padding: 1rem 1rem;
+}
+
+.SuggestionFlexBox {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+}
+
+.SuggestionButton {
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.SuggestionButton .sapMBtnInner.sapMBtnText {
+    box-shadow: 2px 2px 4px rgba(85, 107, 130, 0.3) !important;
+    border-radius: 16px !important;
+    color: #0024e9 !important;
+}
+
+.card {
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    width: 390px !important;
+    box-shadow: 0 0 1rem 0 rgba(34, 53, 72, 0.2), 0 0.5rem 0.5rem 0 rgba(34, 53, 72, 0.2) !important;
+}
+
+.card .sapFCardHeader .sapFCardHeaderText .sapFCardTitle {
+    font-size: 1rem !important;
+    padding-left: 0.5rem;
+}
+
+.card .sapFCardContent {
+    justify-content: center !important;
+}
+
+.card .sapFCardHeader .sapFCardHeaderToolbarCont .sapFCardHeaderToolbar {
+    border: none !important;
+}
+
+.card .sapFCardHeader {
+padding: 0.5rem !important;
+}
+
+.panel .sapMPanelHdr {
+    border: 0rem solid !important;
+    height: fit-content !important;
+    text-wrap: wrap;
+}
+
+.panel .sapMPanelWrappingDiv,
+.sapMPanelWrappingDivTb {
+    border: 0rem solid !important;
+}
+
+.cardContentBox {
+    width: 100% !important;
+}
+/* For Reference Box inside a card */
+.cardContentBox .sapMFlexItem {
+    width: 100% !important;
+}
+
+/* Joule CSS */
+.timestamp {
+    font-family: 72;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+    color: #8396A8;
+    font-weight: bold;
+
+}
+
+
+.dasTextAreaInput {
+    padding: 4px 0px 4px 0px;
+    gap: 0px;
+    border-radius: 8px;
+    border: 2px 0px 0px 0px;
+    opacity: 0px;
+    align-self: center;
+    width: 700px;
+    min-width: 60%;
+    max-width: 100%;
+    /* background: #FFFFFF;
+    border: 2px solid #0064D9;
+    box-shadow: 0px 4px 8px 0px #1B90FF29; */
+
+}
+
+.dasTextAreaInput:not(:focus-within):not(:focus):not(:hover), 
+.dasTextAreaInput:not(:focus-within):not(:focus):not(:hover) {
+    background-color: var(--sapField_Background);
+    background-position: center bottom 0;
+}
+
+.dasTextAreaInput:not(:focus-within):not(:focus), 
+.dasTextAreaInput:not(:focus-within):not(:focus) {
+    background-position: center bottom 0;
+    background-size: 100% 2px;
+    background-repeat: repeat-x;
+    background-image: var(--dasTextArea_BackgroundImage, var(--_ui5_textarea_background_image));
+}
+
+/* {
+    box-shadow: var(--dasContent_Shadow2, var(--sapContent_Interaction_Shadow));
+    border-color: var(--dasContent_Hover_BorderColor, var(--sapField_Hover_BorderColor, #333));
+} */
+
+
+.dasTextAreaInput:focus-within,
+.dasTextAreaInput:hover {
+    border-width: 0.125rem;
+    border-color: var(--dasContent_FocusColor, var(--sapContent_FocusColor, #333));
+    border-style: solid;
+    box-shadow: var(--dasFooter_ButtonShadow, var(--sapContent_Interaction_Shadow));
+}
+
+
+.chattextarea {
+    width: 100% !important;
+    height: 100% !important;
+    padding: 5px 0px 7px 8px;
+    gap: 10px;
+    opacity: 0px;
+    max-width: 100%;
+    border: none !important;
+}
+
+.chattextarea .sapMInputBaseContentWrapper{
+    border: none !important;
+    box-shadow: none !important;
+    background: none !important;
+}
+
+.chattextarea .sapMInputBaseContentWrapper .sapMInputBaseInner:not(.sapMInputBaseReadonlyWrapper):not(.sapMInputBaseContentWrapperState):focus {
+    border: none !important;
+}
+
+.chattextarea .sapMInputBaseContentWrapper:not(.sapMInputBaseDisabledWrapper)::before {
+    border: none !important;
+}
+
+.dasChatInputSubmitButtonDisabled {
+    margin-left: 4px;
+    opacity: .6;
+}
+
+
+.dasChatInputSubmitButton {
+
+    display: inline-block;
+    border-radius: 50%;
+    box-shadow: 0 0 2px #888;
+    padding: 0.5em 0.6em;
+    margin-left: 5px;
+    background-color: var(--sapButton_Emphasized_Background, #0070f2);
+    color: var(--sapButton_Emphasized_TextColor, #ffffff);
+    border-color: var(--sapButton_Emphasized_BorderColor, #0070f2);
+    --sapContent_NonInteractiveIconColor: var(--sapButton_Emphasized_TextColor, #ffffff);
+    --sapContent_IconColor: var(--sapButton_Emphasized_TextColor, #ffffff);
+}
+
+
+.dasChatInputSubmitButton .sapMBtnInner {
+    border-radius: 1rem;
+    height: 1.75rem;
+    width: 1.75rem;
+    border: none !important;
+}
+
+.dasChatInputSubmitButtonDisabled {
+    margin-left: 4px;
+    opacity: .6;
+}
+
+.chattextarea .sapMFocus{
+    border: 2px solid green !important;
+    overflow: hidden;
+    outline:none;
+}
+
+.disclaimerText {
+    font-size: 12px;
+    text-align: center;
+  }
+
+/* Joule CSS */

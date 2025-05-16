@@ -1,0 +1,142 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <FlexBox id="ChatBot" class="ChatBox" direction="Column" visible="{chatModel>/chatBoxVisible}">
+        <Bar class="chatHeaderBar">
+            <contentLeft>
+                <Button app:target="showHistory" icon="sap-icon://customer-history" tooltip="{i18n>chatHistoryTooltip}" press="onChatAction" class="chatCloseButton" visible="{= !${chatModel>/showHistory}}"/>
+                <Button app:target="showHistory" icon="sap-icon://message-popup" tooltip="{i18n>messagePopupTooltip}" press="onChatAction" class="chatCloseButton" visible="{chatModel>/showHistory}"/>
+                <Title text="{i18n>chatTitle}" class="chatHeaderTitle" visible="{= %{chatModel>/isFullScreen}  &amp;&amp; !%{chatModel>/alwaysFullScreen}}"/>
+                <Title text="{i18n>chatTitleMin}" class="chatHeaderTitle" visible="{= !%{chatModel>/isFullScreen}  &amp;&amp; !%{chatModel>/alwaysFullScreen}}"/>
+                <Title text="{i18n>chatTitleMin}" class="chatHeaderTitle" visible="{= %{chatModel>/isFullScreen}  &amp;&amp; %{chatModel>/alwaysFullScreen}}"/>
+            </contentLeft>
+            <contentRight>
+                <Button app:target="refresh" icon="sap-icon://refresh" press="onChatAction" class="chatCloseButton" />
+                <Button app:target="max" icon="sap-icon://expand" press="onChatAction" class="chatCloseButton" visible="{= %{chatModel>/isMinimize}  &amp;&amp; !%{chatModel>/alwaysFullScreen}}"/>
+                <Button app:target="min" icon="sap-icon://minimize" press="onChatAction" class="chatCloseButton" visible="{= !%{chatModel>/isMinimize}  &amp;&amp; !%{chatModel>/alwaysFullScreen}}"/>
+                <Button app:target="fullScreen" icon="sap-icon://full-screen" press="onChatAction" class="chatCloseButton" visible="{= !%{chatModel>/isFullScreen}  &amp;&amp; !%{chatModel>/alwaysFullScreen}}"/>
+                <Button app:target="exitFullScreen" icon="sap-icon://exit-full-screen" press="onChatAction" class="chatCloseButton" visible="{= %{chatModel>/isFullScreen}  &amp;&amp; !%{chatModel>/alwaysFullScreen}}"/>
+                <Button app:target="close" icon="sap-icon://decline" tooltip="{i18n>closeButtonText}" press="onChatAction" class="chatCloseButton" />
+            </contentRight>
+        </Bar>
+         <FlexBox class="chatHeaderBox" direction="Column" 
+                    visible ="{ parts:[ 'chatModel>/showWelcomeText','chatModel>/isMinimize', 'chatModel>/showHistory'], targetType: 'any', formatter:'.formatter.showWelcomeText'}">
+         <FlexBox direction="Column" alignItems="Center" justifyContent="Center" class="chatHeaderBoxImage">
+                <items>
+                    <Image src="{imageModel>/path}/../reuselib/img/JouleIcon.png" class="jouleimg" backgroundPosition="center">
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Image>
+                </items>
+            </FlexBox>
+             <FlexBox direction="Column"  class="chatHeaderBoxText">
+                <Text text="{i18n>chatHeaderText1} {chatModel>/userName}," class="chatHeaderText1"/>
+                <Text text="{i18n>chatHeaderText2}" class="chatHeaderText2"/>
+                <FlexBox alignItems="Center" class="chatHeaderText3">
+                    <Text text="{i18n>chatHeaderText3}"/>
+                </FlexBox>
+            </FlexBox> 
+         <!-- </FlexBox>    -->
+
+       </FlexBox>
+        <FlexBox direction="Column" class="chatFlex hide-scroll" visible="{= !${chatModel>/isMinimize}  &amp;&amp;  !${chatModel>/showHistory}}">
+            <ScrollContainer id="scrollChatBox" class="hide-scroll" height="100%" width="100%" vertical="true" horizontal="false">
+                <FlexBox id="idtiemstamp" alignItems="Center" justifyContent="Center" class="sapUiSmallMargin">
+                    <Text text="{chatModel>/timestamp}" class="timestamp"></Text>
+                </FlexBox>
+                <FlexBox id="dynamicChatBox" class="dynamicChatBox" direction="Column">
+                    <FlexBox id='historyItems' items="{
+                        path: 'shaeQueryModel>messages',
+                        parameters: {
+                            $orderby: 'createdAt,actor desc'
+                        }
+                    }" direction="Column">
+                        <items>
+                            <FlexBox direction="Column">
+                                <FlexBox direction="Column" visible="{= %{shaeQueryModel>message} !== '' &amp;&amp; %{shaeQueryModel>message} !== null}">
+                                    <FlexBox alignItems="Center" justifyContent="End" class="userBox" visible="{= %{shaeQueryModel>actor} === 'user'}">
+                                        <FormattedText htmlText="{ parts:[ 'shaeQueryModel>message'], formatter:'.formatter.formatChat'}" class="userMessage" />
+                                    </FlexBox>
+                                    <FlexBox direction="Column" justifyContent="Start" class="agentBox" visible="{= %{shaeQueryModel>actor} === 'bot'}">
+                                        <FormattedText htmlText="{ parts:[ 'shaeQueryModel>message'], formatter:'.formatter.formatChat'}" class="agentMessage" />
+                                        <FlexBox id="agreeDisagreeBox" class="agreeDisagreeBox">
+                                            <core:Icon id="agreeDisagreeIcon" src="{= %{shaeQueryModel>sentiment} === 'AGREE' ? 'sap-icon://thumb-up' :  'sap-icon://thumb-down' }" visible="{= %{shaeQueryModel>sentiment} !== '' &amp;&amp; %{shaeQueryModel>sentiment} !== null}" class="agreeDisagreeIcon"/>
+                                        </FlexBox>
+                                        <HBox class="messageEmotions" visible="true" id="messageEmotions">
+                                            <Button icon="sap-icon://copy" type="Transparent" app:target="onCopy" press="onChatAction" tooltip="{i18n>copyTooltip}"/>
+                                            <Button icon="sap-icon://synchronize" type="Transparent" app:target="onRegenerate" press="onChatAction" tooltip="{i18n>regenerateTooltip}" app:userMessage="{shaeQueryModel>userMessage}"/>
+                                            <HBox>
+                                                <Button icon="sap-icon://thumb-up" type="{= %{shaeQueryModel>sentiment} === 'AGREE' ? 'Emphasized' :  'Transparent' }" app:target="onAgree" press="onChatAction" tooltip="{i18n>agreeTooltip}" app:ID="{shaeQueryModel>ID}"/>
+                                                <Button icon="sap-icon://thumb-down" type="{= %{shaeQueryModel>sentiment} === 'DISAGREE' ? 'Emphasized' :  'Transparent' }" app:target="onDisagree" press="onChatAction" tooltip="{i18n>disagreeTooltip}" app:ID="{shaeQueryModel>ID}"/>
+                                            </HBox>
+                                         </HBox>
+                                        <FlexBox id="chatFeedbackComment" class="feedbackBox" justifyContent="Start" direction="Column" app:ID="{shaeQueryModel>ID}" app:target="">
+                                            <TextArea placeholder="Please provide further details for us to improve" value="{shaeQueryModel>comment}" />
+                                            <Button class="submitFeedbackBtn" text="Submit" app:target="onFeedbackSubmit" press="onChatAction"/>
+                                        </FlexBox>
+                                    </FlexBox>
+                                </FlexBox>
+                                <FlexBox app:target="historyactionResponse" visible="{= %{shaeQueryModel>actionResponse} !== '' &amp;&amp; %{shaeQueryModel>actionResponse} !== null}" modelContextChange="onChatAction"></FlexBox>
+                            </FlexBox>
+                        </items>
+                    </FlexBox>
+                    <FlexBox id="chatItems" direction="Column"></FlexBox>
+                </FlexBox>
+                <FlexBox id="chatBusyIndicator" visible="{chatModel>/busyIndicator}" justifyContent="Center" alignItems="Center" class="busyBox">
+                    <BusyIndicator size="1rem" class="busyIndicator"/>
+                </FlexBox>
+            </ScrollContainer>
+        </FlexBox>
+        <FlexBox class="dasTextAreaInput sapUiTinyMarginBeginEnd sapUiTinyMarginBottom" alignItems="Start" visible="{= !${chatModel>/isMinimize}  &amp;&amp;  !${chatModel>/showHistory}}">
+            <TextArea id="chatFeedInput" width="96%" class="chattextarea" liveChange="userlivechange" value="{chatModel>/recentQuery}" rows="1" growingMaxLines="23" placeholder="Message FinSight" growing="true">
+                <layoutData>
+                    <FlexItemData growFactor="1" />
+                </layoutData>
+            </TextArea>
+            <Button id="chatFeedSubmit" app:target="userChat" icon="sap-icon://paper-plane" type="Emphasized" press="onChatAction" class="dasChatInputSubmitButton sapUiTinyMargin"  enabled="{= !%{chatModel>/busyIndicator} &amp;&amp; %{chatModel>/enableSubmit}}" />
+        </FlexBox>
+         <VBox id="idDisclaimerVBox" justifyContent="Center" class="sapUiTinyMarginBeginEnd sapUiSmallMarginBottom disclaimerBox" alignItems="Center" visible="{= !${chatModel>/isMinimize}  &amp;&amp;  !${chatModel>/showHistory}}">
+            <Text id="idDisclaimerText" text="{i18n>disclaimerText}" class="disclaimerText" />
+        </VBox>
+        <FlexBox id="chatHistory" visible="{chatModel>/showHistory}" class="chatHistory" direction="Column">
+            <FlexBox justifyContent="SpaceBetween" class="historyFlexBoxContainer">
+                <FlexBox class="historyFlexBoxSearch">
+                    <SearchField id="searchHistoryInput" width="100%" placeholder="{i18n>chatSearchText}" search="onChatAction" app:target="searchHistory" />
+
+                </FlexBox>
+
+                <FlexBox alignItems="Center" class="paddingLeft1rem">
+                    <Label text="{i18n>sortByLabel}" class="sortByLblPosition"/>
+                    <MenuButton text="{chatModel>/historySortBy}" id="sortbyTxt" type="Transparent" class="sapUiTinyMarginBeginEnd sapUiSizeCompact">
+                        <menu>
+                            <Menu app:target="onHistorySort" itemSelected="onChatAction" class="sortByMenuList">
+                                <MenuItem text="{i18n>sortByModified}" key="recent"/>
+                                <MenuItem text="{i18n>sortByAtoZ}" key="asc"/>
+                                <MenuItem text="{i18n>sortByZtoA}" key="desc"/>
+                            </Menu>
+                        </menu>
+                    </MenuButton>
+                </FlexBox>
+            </FlexBox>
+            <List id="chatHistoryList" items="{path: 'shaeQueryModel>/Conversations'}" class="chatHistoryList" selectionChange=".onHistorySelect" mode="SingleSelectMaster" includeItemInSelection="true">
+                <CustomListItem class="chatHistoryListItem sapUiTinyMarginTopBottom">
+                    <FlexBox class="chatHistoryItem" justifyContent="SpaceBetween">
+                        <VBox id="chatHistoryDetail" class="sapUiTinyMarginBegin" width="75%">
+                            <Text text="{shaeQueryModel>chatName}" visible="{= ${chatModel>/editedItemID} !== %{shaeQueryModel>ID}}" class="textBold  systemIDTxt"/>
+                            <Input value="{shaeQueryModel>chatName}" visible="{= ${chatModel>/editedItemID} === %{shaeQueryModel>ID}}" class="chatHistoryInput" maxLength="50"/>
+                            <Text text="{shaeQueryModel>modifiedAt}" class="font07"/>
+                        </VBox>
+                        <FlexBox id="chatHistoryActions" class="chatHistoryActions" alignItems="Center">
+                            <Button app:target="editHistory" type="Transparent" icon="sap-icon://edit" press="onChatAction" visible="{= ${chatModel>/editedItemID} !== %{shaeQueryModel>ID}}" />
+                            <Button app:target="saveHistory" type="Transparent" icon="sap-icon://save" press="onChatAction" visible="{= ${chatModel>/editedItemID} === %{shaeQueryModel>ID}}" />
+                            <Button app:target="deleteHistory" type="Transparent" icon="sap-icon://delete" press="onChatAction" visible="{= ${chatModel>/editedItemID} !== %{shaeQueryModel>ID}}" />
+                        </FlexBox>
+                    </FlexBox> 
+                 </CustomListItem>
+            </List>
+
+        </FlexBox>
+    </FlexBox>
+</core:FragmentDefinition>
