@@ -27,7 +27,7 @@ modules:
           sap.cloud.service: finsight
         - Authentication: OAuth2UserTokenExchange
           Name: finsight_uaa
-          ServiceInstanceName: finsight-xsuaa-service
+          ServiceInstanceName: finsight-uaa-service
           ServiceKeyName: finsight-uaa-key
           sap.cloud.service: finsight
         existing_destinations_policy: update
@@ -68,7 +68,7 @@ resources:
   type: org.cloudfoundry.managed-service
   parameters:
     config:
-      HTML5Runtime_enabled: false
+      HTML5Runtime_enabled: true
       init_data:
         instance:
           destinations:
@@ -87,7 +87,7 @@ resources:
   parameters:
     path: ./xs-security.json
     service: xsuaa
-    service-name: finsight-xsuaa-service
+    service-name: finsight-uaa-service
     service-plan: application    
 parameters:
   deploy_mode: html5-repo
